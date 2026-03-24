@@ -1,0 +1,183 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+// ~/.config/zed/settings.json
+{
+  // === Theme & Appearance ===
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry",
+    },
+  },
+  "outline_panel": {
+    "button": false,
+  },
+  "search": {
+    "button": true,
+  },
+  "title_bar": {
+    "show_branch_name": true,
+    "show_project_items": true,
+    "show_onboarding_banner": true,
+    "show_sign_in": true,
+    "show_user_menu": true,
+    "show_user_picture": true,
+  },
+  "theme": {
+    "mode": "system",
+    "light": "Catppuccin Mocha",
+    "dark": "NvChad Rxyhn Theme",
+  },
+  "icon_theme": "Catppuccin Mocha",
+  "buffer_font_family": "DankMono Nerd Font",
+  "buffer_font_size": 16,
+  "buffer_font_weight": 550,
+  "ui_font_size": 15,
+  "agent_ui_font_size": 16.0,
+
+  // === Vim ===
+  "vim_mode": true,
+  "vim": {
+    "use_system_clipboard": "always",
+    "use_smartcase_find": true,
+    // "enable_vim_sneak": true,
+    "gdefault": false,
+    "toggle_relative_line_numbers": true,
+  },
+  "relative_line_numbers": "enabled",
+  "base_keymap": "Cursor",
+
+  // === Which Key (shows leader hints) ===
+  "which_key": {
+    "enabled": true,
+  },
+
+  // === Layout ===
+  "project_panel": {
+    "button": true,
+    "dock": "left",
+    "indent_size": 20.0,
+    "entry_spacing": "standard",
+  },
+  "git_panel": { "dock": "right" },
+  "tab_bar": {
+    "show_tab_bar_buttons": true,
+    "show_nav_history_buttons": true,
+    "show": true,
+  },
+  "scrollbar": { "show": "never" },
+  "minimap": {
+    "show": "auto",
+    "current_line_highlight": "all",
+    "max_width_columns": 55,
+    "thumb": "always",
+    "thumb_border": "left_open",
+  },
+  "tabs": { "show_diagnostics": "errors" },
+  "indent_guides": { "enabled": true, "coloring": "indent_aware" },
+
+  // === Editor ===
+  "format_on_save": "on",
+  "soft_wrap": "editor_width",
+  "cursor_blink": true,
+  "show_whitespaces": "boundary",
+  "inlay_hints": { "enabled": true },
+
+  // === Prettier ===
+  "prettier": { "allowed": true },
+
+  // === Terminal ===
+  "terminal": {
+    "toolbar": {
+      "breadcrumbs": false,
+    },
+    "shell": { "program": "zsh" },
+    "font_family": "DankMono Nerd Font",
+    "font_size": 16,
+    "blinking": "on",
+    "dock": "bottom",
+  },
+
+  // === Languages ===
+  "languages": {
+    "TypeScript": {
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"],
+        },
+      },
+    },
+    "TSX": {
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"],
+        },
+      },
+    },
+    "JavaScript": {
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"],
+        },
+      },
+    },
+    "JSON": {
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"],
+        },
+      },
+    },
+    "CSS": {
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"],
+        },
+      },
+    },
+    "HTML": {
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"],
+        },
+      },
+    },
+  },
+
+  // === Git ===
+  "git": {
+    "inline_blame": { "enabled": true },
+  },
+
+  // === AI ===
+  "agent": {
+    "default_model": {
+      "effort": "high",
+      "enable_thinking": true,
+      "provider": "zed.dev",
+      "model": "claude-sonnet-4-6",
+    },
+  },
+
+  // === File types ===
+  "file_types": {
+    "JSONC": ["tsconfig.json", "tsconfig.*.json", ".prettierrc"],
+  },
+
+  // === Telemetry ===
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+}
