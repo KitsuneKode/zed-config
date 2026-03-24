@@ -20,14 +20,10 @@
       "ctrl-`": "workspace::ToggleBottomDock",
     },
   },
-  // --- AI (space a) ---
   {
-    "context": "Workspace",
+    "context": "Workspace && not_editing",
     "bindings": {
-      "space a a": "agent::ToggleFocus",
-      "ctrl+i": "assistant::InlineAssist",
-      "space a e": "assistant::InlineAssist",
-      "space a q": "workspace::ToggleRightDock",
+      "space e": "workspace::ToggleLeftDock",
     },
   },
   // =============================================
@@ -105,7 +101,12 @@
   {
     "context": "vim_mode == visual && !menu",
     "bindings": {
-      "ctrl-s": ["action::Sequence", ["vim::SwitchToNormalMode", "workspace::Save"]],
+      "ctrl-k": "assistant::InlineAssist",
+      "ctrl-l": "agent::AddSelectionToThread",
+      "ctrl-s": [
+        "action::Sequence",
+        ["vim::SwitchToNormalMode", "workspace::Save"],
+      ],
     },
   },
 
@@ -316,6 +317,7 @@
       "ctrl-v": "editor::Paste",
       "ctrl-x": "editor::Cut",
       "ctrl-a": "editor::SelectAll",
+      "ctrl-i": "assistant::InlineAssist",
       "ctrl-shift-l": "editor::SelectAllMatches",
     },
   },
