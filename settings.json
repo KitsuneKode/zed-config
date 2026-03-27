@@ -9,6 +9,8 @@
 // ~/.config/zed/settings.json
 {
   // === Theme & Appearance ===
+  "ui_font_family": "MonoLisa",
+  "buffer_line_height": "standard",
   "agent_servers": {
     "claude-acp": {
       "type": "registry",
@@ -34,10 +36,10 @@
     "dark": "NvChad Rxyhn Theme",
   },
   "icon_theme": "Catppuccin Mocha",
-  "buffer_font_family": "DankMono Nerd Font",
-  "buffer_font_size": 16,
+  "buffer_font_family": "MonoLisa",
+  "buffer_font_size": 16.0,
   "buffer_font_weight": 550,
-  "ui_font_size": 15,
+  "ui_font_size": 15.0,
   "agent_ui_font_size": 16.0,
 
   // === Vim ===
@@ -97,7 +99,7 @@
       "breadcrumbs": false,
     },
     "shell": { "program": "zsh" },
-    "font_family": "DankMono Nerd Font",
+    "font_family": "MonoLisa",
     "font_size": 16,
     "blinking": "on",
     "dock": "bottom",
