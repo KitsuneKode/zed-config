@@ -14,6 +14,13 @@
   // GLOBAL — works everywhere
   // =============================================
   {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-l": "agent::AddSelectionToThread",
+      "ctrl-i": "assistant::InlineAssist",
+    },
+  },
+  {
     "context": "Workspace || Editor || Terminal",
     "bindings": {
       "ctrl-/": "workspace::ToggleBottomDock",
@@ -38,7 +45,7 @@
       "ctrl-j": "workspace::ActivatePaneDown",
     },
   },
-
+  {},
   // =============================================
   // INSERT MODE
   // =============================================
@@ -48,6 +55,7 @@
       "j k": ["workspace::SendKeystrokes", "escape"],
       "j j": ["workspace::SendKeystrokes", "escape"],
       "ctrl-s": ["action::Sequence", ["vim::NormalBefore", "workspace::Save"]],
+      "ctrl-l": "agent::Toggle",
     },
   },
 
@@ -95,6 +103,7 @@
     "bindings": {
       "ctrl-s": "workspace::Save",
       "shift-y": ["workspace::SendKeystrokes", "y $"],
+      "ctrl-l": "agent::Toggle",
     },
   },
 

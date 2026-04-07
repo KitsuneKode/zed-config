@@ -9,9 +9,31 @@
 // ~/.config/zed/settings.json
 {
   // === Theme & Appearance ===
+  "agent_buffer_font_size": 15.0,
   "ui_font_family": "MonoLisa",
   "buffer_line_height": "standard",
   "agent_servers": {
+    "qoder": {
+      "type": "registry"
+    },
+    "pi-acp": {
+      "type": "registry"
+    },
+    "opencode": {
+      "type": "registry"
+    },
+    "kimi": {
+      "type": "registry"
+    },
+    "junie": {
+      "type": "registry"
+    },
+    "gemini": {
+      "type": "registry"
+    },
+    "codex-acp": {
+      "type": "registry"
+    },
     "claude-acp": {
       "type": "registry",
     },
@@ -38,7 +60,7 @@
   "icon_theme": "Catppuccin Mocha",
   "buffer_font_family": "MonoLisa",
   "buffer_font_size": 16.0,
-  "buffer_font_weight": 550,
+  "buffer_font_weight": 450.0,
   "ui_font_size": 15.0,
   "agent_ui_font_size": 16.0,
 
@@ -100,7 +122,7 @@
     },
     "shell": { "program": "zsh" },
     "font_family": "MonoLisa",
-    "font_size": 16,
+    "font_size": 15.0,
     "blinking": "on",
     "dock": "bottom",
   },
@@ -112,6 +134,35 @@
 
   // === AI ===
   "agent": {
+    "tool_permissions": {
+      "tools": {
+        "create_directory": {
+          "default": "allow"
+        },
+        "terminal": {
+          "default": "allow",
+          "always_allow": [
+            {
+              "pattern": "^wc\\b"
+            },
+            {
+              "pattern": "^cat\\s+test\\.txt(\\s|$)"
+            },
+            {
+              "pattern": "^find\\s+\\.(\\s|$)"
+            }
+          ]
+        },
+        "fetch": {
+          "always_allow": [
+            {
+              "pattern": "^https?://github\\.com"
+            }
+          ]
+        }
+      }
+    },
+    "default_profile": "ask",
     "default_model": {
       "effort": "high",
       "enable_thinking": true,
