@@ -9,10 +9,71 @@
 // ~/.config/zed/settings.json
 {
   // === Theme & Appearance ===
+  "semantic_tokens": "combined",
+  "languages": {
+    "TypeScript": {
+      "document_folding_ranges": "off",
+      "colorize_brackets": true,
+      "inlay_hints": {
+        "show_background": false,
+        "show_other_hints": true,
+        "show_type_hints": true,
+        "show_value_hints": true,
+        "enabled": true
+      },
+      "indent_guides": {
+        "coloring": "indent_aware",
+        "line_width": 2,
+        "active_line_width": 1,
+        "background_coloring": "disabled"
+      }
+    },
+    "TSX": {
+      "inlay_hints": { "enabled": true, "show_background": false },
+      "colorize_brackets": true
+    },
+    "JavaScript": {
+      "inlay_hints": { "enabled": true, "show_background": false },
+      "colorize_brackets": true
+    },
+    "Markdown": {
+      "soft_wrap": "editor_width",
+      "show_edit_predictions": false
+    }
+  },
+  // TypeScript LSP — show hints only when useful, not on obvious inferred types
+  "lsp": {
+    "typescript-language-server": {
+      "initialization_options": {
+        "preferences": {
+          // param names: only on literals (not when arg name == param name)
+          "includeInlayParameterNameHints": "literals",
+          "includeInlayParameterNameHintsWhenArgumentMatchesName": false,
+          // don't show variable types when TS can obviously infer them
+          "includeInlayVariableTypeHints": false,
+          "includeInlayVariableTypeHintsWhenTypeMatchesName": false,
+          // function param types — off, too noisy
+          "includeInlayFunctionParameterTypeHints": false,
+          // return types — on, useful to see without hovering
+          "includeInlayFunctionLikeReturnTypeHints": true,
+          // property types in class/object — off, inferred by TS
+          "includeInlayPropertyDeclarationTypeHints": false,
+          // enum values — on, very useful
+          "includeInlayEnumMemberValueHints": true
+        }
+      }
+    }
+  },
+  "notification_panel": {
+    "show_count_badge": true
+  },
   "agent_buffer_font_size": 15.0,
   "ui_font_family": "MonoLisa",
   "buffer_line_height": "standard",
   "agent_servers": {
+    "factory-droid": {
+      "type": "registry"
+    },
     "qoder": {
       "type": "registry"
     },
@@ -72,7 +133,10 @@
     // "enable_vim_sneak": true,
     "gdefault": false,
     "toggle_relative_line_numbers": true,
+    "highlight_on_yank_duration": 200,
+    "use_regex_search": true,
   },
+  "current_line_highlight": "all",
   "relative_line_numbers": "enabled",
   "base_keymap": "Cursor",
 
@@ -111,6 +175,10 @@
   "cursor_blink": true,
   "show_whitespaces": "boundary",
   "inlay_hints": { "enabled": true },
+  "linked_edits": true,
+  "colorize_brackets": true,
+  "remove_trailing_whitespace_on_save": true,
+  "show_edit_predictions": true,
 
   // === Prettier ===
   "prettier": { "allowed": true },

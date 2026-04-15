@@ -6,20 +6,33 @@
 // To see the default key bindings run `zed: open default keymap`
 // from the command palette.
 //
-//
 // ~/.config/zed/keymap.json
-// LazyVim → Zed complete migration
+// LazyVim → Zed  |  Cursor AI workflow
 [
   // =============================================
-  // GLOBAL — works everywhere
+  // TERMINAL — AI triggers (Cursor-style ctrl-k)
   // =============================================
   {
     "context": "Terminal",
     "bindings": {
-      "ctrl-l": "agent::AddSelectionToThread",
+      "ctrl-k": "assistant::InlineAssist",
       "ctrl-i": "assistant::InlineAssist",
     },
   },
+
+  // =============================================
+  // GLOBAL — recent projects (works everywhere)
+  // =============================================
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-shift-o": "projects::OpenRecent",
+    },
+  },
+
+  // =============================================
+  // GLOBAL TOGGLES — terminal dock, command palette
+  // =============================================
   {
     "context": "Workspace || Editor || Terminal",
     "bindings": {
@@ -33,19 +46,21 @@
       "space e": "workspace::ToggleLeftDock",
     },
   },
+
   // =============================================
-  // WINDOW NAVIGATION — works in editor, terminal, docks
+  // WINDOW / PANE NAVIGATION
+  // ctrl-k is freed for AI — pane-up moves to ctrl-shift-k
   // =============================================
   {
     "context": "Dock || Terminal || Editor",
     "bindings": {
       "ctrl-h": "workspace::ActivatePaneLeft",
       "ctrl-l": "workspace::ActivatePaneRight",
-      "ctrl-k": "workspace::ActivatePaneUp",
       "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-shift-k": "workspace::ActivatePaneUp",
     },
   },
-  {},
+
   // =============================================
   // INSERT MODE
   // =============================================
@@ -55,6 +70,8 @@
       "j k": ["workspace::SendKeystrokes", "escape"],
       "j j": ["workspace::SendKeystrokes", "escape"],
       "ctrl-s": ["action::Sequence", ["vim::NormalBefore", "workspace::Save"]],
+      // Cursor-style AI in insert mode
+      "ctrl-k": "assistant::InlineAssist",
       "ctrl-l": "agent::Toggle",
     },
   },
@@ -75,6 +92,20 @@
   },
 
   // =============================================
+  // SUBWORD MOTIONS (w/b/e navigate camelCase & snake_case)
+  // e.g. myVariableName → 3 stops instead of 1
+  // =============================================
+  {
+    "context": "VimControl && !menu && vim_mode != operator",
+    "bindings": {
+      "w": "vim::NextSubwordStart",
+      "b": "vim::PreviousSubwordStart",
+      "e": "vim::NextSubwordEnd",
+      "g e": "vim::PreviousSubwordEnd",
+    },
+  },
+
+  // =============================================
   // SNEAK (s/S — like leap.nvim)
   // =============================================
   {
@@ -82,6 +113,16 @@
     "bindings": {
       "s": "vim::PushSneak",
       "S": "vim::PushSneakBackward",
+    },
+  },
+
+  // =============================================
+  // VISUAL MODE SURROUND (g s — S is taken by sneak backward)
+  // =============================================
+  {
+    "context": "vim_mode == visual",
+    "bindings": {
+      "g s": "vim::PushAddSurrounds",
     },
   },
 
@@ -96,22 +137,31 @@
   },
 
   // =============================================
-  // NORMAL MODE ONLY
+  // NORMAL MODE
   // =============================================
   {
     "context": "vim_mode == normal && !menu",
     "bindings": {
       "ctrl-s": "workspace::Save",
       "shift-y": ["workspace::SendKeystrokes", "y $"],
+      // Cursor AI: ctrl-k = inline edit, ctrl-l = toggle AI panel
+      "ctrl-k": "assistant::InlineAssist",
       "ctrl-l": "agent::Toggle",
+      // Cursor AI: ctrl-e = toggle agent layout (right dock)
+      "ctrl-e": "workspace::ToggleRightDock",
     },
   },
 
+  // =============================================
+  // VISUAL MODE
+  // =============================================
   {
     "context": "vim_mode == visual && !menu",
     "bindings": {
+      // Cursor AI: ctrl-k = inline assist on selection
       "ctrl-k": "assistant::InlineAssist",
-      "ctrl-l": "agent::AddSelectionToThread",
+      // Cursor AI: ctrl-shift-l = add selection to chat (matches Cursor exactly)
+      "ctrl-shift-l": "agent::AddSelectionToThread",
       "ctrl-s": [
         "action::Sequence",
         ["vim::SwitchToNormalMode", "workspace::Save"],
@@ -131,18 +181,18 @@
   },
 
   // =============================================
-  // NORMAL + VISUAL — LEADER BINDINGS
+  // NORMAL + VISUAL — LEADER BINDINGS (space as leader)
   // =============================================
   {
     "context": "Editor && VimControl && !VimWaiting && !menu",
     "bindings": {
-      // --- Tab/Buffer navigation (like LazyVim) ---
+      // --- Tab / Buffer navigation ---
       "shift-h": "pane::ActivatePreviousItem",
       "shift-l": "pane::ActivateNextItem",
       "] b": "pane::ActivateNextItem",
       "[ b": "pane::ActivatePreviousItem",
 
-      // Tab by number (like harpoon)
+      // Tab by number (harpoon-style)
       "space 1": ["pane::ActivateItem", 0],
       "space 2": ["pane::ActivateItem", 1],
       "space 3": ["pane::ActivateItem", 2],
@@ -154,7 +204,7 @@
       "space 9": ["pane::ActivateItem", 8],
       "space 0": "pane::ActivateLastItem",
 
-      // --- File/Find (space f) — Telescope equivalents ---
+      // --- File / Find (space f) — Telescope equivalents ---
       "space f f": "file_finder::Toggle",
       "space space": "file_finder::Toggle",
       "space f g": "workspace::NewSearch",
@@ -183,11 +233,17 @@
       "space s s": "outline::Toggle",
       "space s d": "diagnostics::Deploy",
 
-      // --- LSP & Code actions (space c / space l) ---
+      // --- LSP & Code actions (space c) ---
       "space c a": "editor::ToggleCodeActions",
       "space c r": "editor::Rename",
       "space c f": "editor::Format",
       "space l d": "diagnostics::Deploy",
+      // K = LSP hover (LazyVim default)
+      "K": "editor::Hover",
+
+      // --- Diagnostics / Trouble (space x — trouble.nvim) ---
+      "space x x": "diagnostics::Deploy",
+      "space x d": "editor::GoToDiagnostic",
 
       // --- Git (space g) ---
       "space g g": ["task::Spawn", { "task_name": "lazygit" }],
@@ -200,8 +256,6 @@
       // --- Git hunk navigation ---
       "] h": "editor::GoToHunk",
       "[ h": "editor::GoToPreviousHunk",
-      "] c": "editor::GoToHunk",
-      "[ c": "editor::GoToPreviousHunk",
 
       // --- Diagnostic navigation ---
       "] d": "editor::GoToDiagnostic",
@@ -209,11 +263,11 @@
       "] e": "editor::GoToDiagnostic",
       "[ e": "editor::GoToPreviousDiagnostic",
 
-      // --- Excerpt navigation ---
+      // --- Excerpt / quickfix navigation ---
       "] q": "editor::MoveToStartOfNextExcerpt",
       "[ q": "editor::MoveToStartOfExcerpt",
 
-      // --- Window/Split (space w) ---
+      // --- Window / Split (space w) ---
       "space w v": "pane::SplitRight",
       "space w s": "pane::SplitDown",
       "space -": "pane::SplitDown",
@@ -222,13 +276,27 @@
       "space w d": "pane::CloseAllItems",
       "space w q": "pane::CloseActiveItem",
 
-      // --- Terminal (space t / space f t) ---
+      // --- Terminal (space t) ---
       "space t": "workspace::ToggleBottomDock",
       "space f t": "workspace::ToggleBottomDock",
+
+      // --- Tasks (space r — run tasks like lazygit, dev, test) ---
+      "space r r": "task::Spawn",
+      "space r l": ["task::Spawn", { "task_name": "lazygit" }],
+      "space r d": ["task::Spawn", { "task_name": "dev (bun)" }],
+      "space r t": ["task::Spawn", { "task_name": "test" }],
+      "space r b": ["task::Spawn", { "task_name": "build" }],
+
+      // --- AI Panel (space a — agent/chat panel) ---
+      "space a": "workspace::ToggleRightDock",
 
       // --- Toggle features (space u) ---
       "space u i": "editor::ToggleInlayHints",
       "space u w": "editor::ToggleSoftWrap",
+
+      // --- Command palette (space ; / space :) ---
+      "space ;": "command_palette::Toggle",
+      "space :": "command_palette::Toggle",
 
       // --- Markdown preview ---
       "space m p": "markdown::OpenPreview",
@@ -240,6 +308,7 @@
 
       // --- Clear search highlights ---
       "space n": ["workspace::SendKeystrokes", ": n o h enter"],
+
       // --- Quit ---
       "space q q": "zed::Quit",
     },
@@ -293,12 +362,19 @@
   },
 
   // =============================================
-  // AI PANEL
+  // AI / AGENT PANEL — Cursor-style mode switching
+  // shift-tab = cycle profiles (Write → Ask → Minimal)
+  // ctrl-alt-p = manage profiles modal
+  // ctrl-alt-/ = switch AI model
+  // ctrl-shift-h = view thread history
   // =============================================
   {
     "context": "AgentPanel",
     "bindings": {
       "ctrl-\\": "workspace::ToggleRightDock",
+      "ctrl-n": "agent::NewThread",
+      "ctrl-shift-h": "agent::OpenHistory",
+      "ctrl-alt-p": "agent::ManageProfiles",
     },
   },
 
@@ -317,7 +393,9 @@
   },
 
   // =============================================
-  // RESTORE CTRL SHORTCUTS (Linux vim override fix)
+  // EDITOR — restore standard shortcuts
+  // ctrl-shift-l = add selection to AI chat (Cursor-style)
+  // ctrl-shift-a = select all matches (moved from ctrl-shift-l)
   // =============================================
   {
     "context": "Editor && !menu",
@@ -327,7 +405,8 @@
       "ctrl-x": "editor::Cut",
       "ctrl-a": "editor::SelectAll",
       "ctrl-i": "assistant::InlineAssist",
-      "ctrl-shift-l": "editor::SelectAllMatches",
+      "ctrl-shift-l": "agent::AddSelectionToThread",
+      "ctrl-shift-a": "editor::SelectAllMatches",
     },
   },
 ]
