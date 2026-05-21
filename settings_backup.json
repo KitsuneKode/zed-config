@@ -1,0 +1,231 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+// ~/.config/zed/settings.json
+{
+  // === Theme & Appearance ===
+  "language_models": {
+    "opencode": {
+      "show_zen_models": false
+    }
+  },
+  "ui_font_weight": 400.0,
+  "languages": {
+    "TypeScript": {
+      "colorize_brackets": true,
+      "inlay_hints": {
+        "show_background": false,
+        "show_other_hints": true,
+        "show_type_hints": true,
+        "show_value_hints": true,
+        "enabled": true
+      },
+      "indent_guides": {
+        "coloring": "indent_aware",
+        "line_width": 2,
+        "active_line_width": 1,
+        "background_coloring": "disabled"
+      }
+    },
+    "TSX": {
+      "inlay_hints": { "enabled": true, "show_background": false },
+      "colorize_brackets": true
+    },
+    "JavaScript": {
+      "inlay_hints": { "enabled": true, "show_background": false },
+      "colorize_brackets": true
+    },
+    "Markdown": {
+      "soft_wrap": "editor_width",
+      "show_edit_predictions": false,
+      "remove_trailing_whitespace_on_save": false
+    }
+  },
+  // TypeScript LSP — show hints only when useful, not on obvious inferred types
+  "lsp": {
+    "typescript-language-server": {
+      "initialization_options": {
+        "preferences": {
+          // param names: only on literals (not when arg name == param name)
+          "includeInlayParameterNameHints": "literals",
+          "includeInlayParameterNameHintsWhenArgumentMatchesName": false,
+          // don't show variable types when TS can obviously infer them
+          "includeInlayVariableTypeHints": false,
+          "includeInlayVariableTypeHintsWhenTypeMatchesName": false,
+          // function param types — off, too noisy
+          "includeInlayFunctionParameterTypeHints": false,
+          // return types — on, useful to see without hovering
+          "includeInlayFunctionLikeReturnTypeHints": true,
+          // property types in class/object — off, inferred by TS
+          "includeInlayPropertyDeclarationTypeHints": false,
+          // enum values — on, very useful
+          "includeInlayEnumMemberValueHints": true
+        }
+      }
+    }
+  },
+  "notification_panel": {
+    "show_count_badge": true
+  },
+  "agent_buffer_font_size": 15.0,
+  "ui_font_family": "MonoLisa",
+  "buffer_line_height": "comfortable",
+
+  // Active external agents — add more in settings; see README.md
+  //---
+  "agent_servers": {
+    "cursor": {
+      "type": "registry"
+    },
+    "opencode": {
+      "type": "registry"
+    },
+    "claude-acp": {
+      "type": "registry"
+    },
+    "codex-acp": {
+      "type": "registry"
+    }
+  },
+  //---
+
+  "outline_panel": {
+    "dock": "left",
+    "button": true
+  },
+  "search": {
+    "button": true
+  },
+  "title_bar": {
+    "show_branch_name": true,
+    "show_project_items": true,
+    "show_onboarding_banner": false,
+    "show_sign_in": true,
+    "show_user_menu": true,
+    "show_user_picture": true
+  },
+  "theme": {
+    "mode": "dark",
+    "light": "Catppuccin Mocha",
+    "dark": "NvChad Rxyhn Theme"
+  },
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Warm Charmed Icons",
+    "dark": "Material Icon Theme"
+  },
+  "buffer_font_family": "MonoLisa",
+  "buffer_font_size": 15.0,
+  "buffer_font_weight": 400.0,
+  "ui_font_size": 15.0,
+  "agent_ui_font_size": 15.0,
+
+  // === Vim ===
+  "vim_mode": true,
+  "vim": {
+    "use_system_clipboard": "always",
+    "use_smartcase_find": true,
+    // "enable_vim_sneak": true,
+    "gdefault": false,
+    "highlight_on_yank_duration": 200,
+    "use_regex_search": true
+  },
+  "current_line_highlight": "all",
+  "relative_line_numbers": "enabled",
+  "base_keymap": "Cursor",
+
+  // === Which Key (shows leader hints) ===
+  "which_key": {
+    "enabled": true
+  },
+
+  // === Layout ===
+  "project_panel": {
+    "button": true,
+    "dock": "left",
+    "indent_size": 20.0,
+    "entry_spacing": "standard"
+  },
+  "git_panel": { "dock": "left" },
+  "tab_bar": {
+    "show_pinned_tabs_in_separate_row": false,
+    "show_tab_bar_buttons": true,
+    "show_nav_history_buttons": true,
+    "show": true
+  },
+  "scrollbar": { "show": "auto" },
+  "minimap": {
+    "show": "never"
+  },
+  "tabs": { "file_icons": true, "show_diagnostics": "errors" },
+  "indent_guides": { "enabled": true, "coloring": "indent_aware" },
+
+  // === Editor ===
+  "format_on_save": "lsp",
+  "soft_wrap": "editor_width",
+  "cursor_blink": true,
+  "show_whitespaces": "boundary",
+  "inlay_hints": { "enabled": true },
+  "linked_edits": true,
+  "colorize_brackets": true,
+  "remove_trailing_whitespace_on_save": true,
+  "show_edit_predictions": true,
+
+  // === Prettier ===
+  "prettier": { "allowed": true },
+
+  // === Terminal ===
+  "terminal": {
+    "scrollbar": {
+      "show": "system"
+    },
+    "toolbar": {
+      "breadcrumbs": false
+    },
+    "shell": { "program": "zsh" },
+    "font_family": "MonoLisa",
+    "font_size": 15.0,
+    "cursor_shape": "bar",
+    "blinking": "terminal_controlled",
+    "dock": "bottom"
+  },
+
+  // === Git ===
+  "git": {
+    "inline_blame": { "enabled": true }
+  },
+
+  // === AI ===
+  "agent": {
+    "play_sound_when_agent_done": "never",
+    "notify_when_agent_waiting": "primary_screen",
+    "sidebar_side": "right",
+    "dock": "right",
+    "tool_permissions": {
+      "default": "confirm"
+    },
+    "default_profile": "write",
+    "default_model": {
+      "effort": "max",
+      "enable_thinking": true,
+      "provider": "opencode",
+      "model": "go/deepseek-v4-flash"
+    }
+  },
+
+  // === File types ===
+  "file_types": {
+    "JSONC": ["tsconfig.json", "tsconfig.*.json", ".prettierrc"]
+  },
+
+  // === Telemetry ===
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  }
+}

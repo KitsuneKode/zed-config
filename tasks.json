@@ -1,7 +1,4 @@
 [
-  // =============================================
-  // GIT
-  // =============================================
   {
     "label": "lazygit",
     "command": "lazygit",
@@ -12,23 +9,10 @@
     "hide": "on_success",
     "save": "none",
   },
-
-  // =============================================
-  // PACKAGE MANAGERS — dev servers
-  // =============================================
-  {
-    "label": "dev (npm)",
-    "command": "npm run dev",
-    "cwd": "$ZED_WORKTREE_ROOT",
-    "use_new_terminal": true,
-    "allow_concurrent_runs": false,
-    "reveal": "always",
-    "hide": "never",
-    "save": "all",
-  },
   {
     "label": "dev (bun)",
-    "command": "bun run dev",
+    "command": "bun",
+    "args": ["run", "dev"],
     "cwd": "$ZED_WORKTREE_ROOT",
     "use_new_terminal": true,
     "allow_concurrent_runs": false,
@@ -37,22 +21,9 @@
     "save": "all",
   },
   {
-    "label": "dev (pnpm)",
-    "command": "pnpm dev",
-    "cwd": "$ZED_WORKTREE_ROOT",
-    "use_new_terminal": true,
-    "allow_concurrent_runs": false,
-    "reveal": "always",
-    "hide": "never",
-    "save": "all",
-  },
-
-  // =============================================
-  // BUILD
-  // =============================================
-  {
-    "label": "build",
-    "command": "npm run build",
+    "label": "test (bun)",
+    "command": "bun",
+    "args": ["run", "test"],
     "cwd": "$ZED_WORKTREE_ROOT",
     "use_new_terminal": false,
     "allow_concurrent_runs": false,
@@ -62,21 +33,8 @@
   },
   {
     "label": "build (bun)",
-    "command": "bun run build",
-    "cwd": "$ZED_WORKTREE_ROOT",
-    "use_new_terminal": false,
-    "allow_concurrent_runs": false,
-    "reveal": "always",
-    "hide": "on_success",
-    "save": "all",
-  },
-
-  // =============================================
-  // TEST
-  // =============================================
-  {
-    "label": "test",
-    "command": "npm test",
+    "command": "bun",
+    "args": ["run", "build"],
     "cwd": "$ZED_WORKTREE_ROOT",
     "use_new_terminal": false,
     "allow_concurrent_runs": false,
@@ -85,8 +43,9 @@
     "save": "all",
   },
   {
-    "label": "test (bun)",
-    "command": "bun test",
+    "label": "typecheck (bun)",
+    "command": "bun",
+    "args": ["run", "typecheck"],
     "cwd": "$ZED_WORKTREE_ROOT",
     "use_new_terminal": false,
     "allow_concurrent_runs": false,
@@ -95,32 +54,9 @@
     "save": "all",
   },
   {
-    "label": "test watch",
-    "command": "npm run test:watch",
-    "cwd": "$ZED_WORKTREE_ROOT",
-    "use_new_terminal": true,
-    "allow_concurrent_runs": false,
-    "reveal": "always",
-    "hide": "never",
-    "save": "none",
-  },
-
-  // =============================================
-  // MISC
-  // =============================================
-  {
-    "label": "install deps",
-    "command": "npm install",
-    "cwd": "$ZED_WORKTREE_ROOT",
-    "use_new_terminal": false,
-    "allow_concurrent_runs": false,
-    "reveal": "always",
-    "hide": "on_success",
-    "save": "none",
-  },
-  {
-    "label": "type check",
-    "command": "npx tsc --noEmit",
+    "label": "lint (bun)",
+    "command": "bun",
+    "args": ["run", "lint"],
     "cwd": "$ZED_WORKTREE_ROOT",
     "use_new_terminal": false,
     "allow_concurrent_runs": false,

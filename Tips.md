@@ -1,7 +1,7 @@
 # Zed Tips & Tricks
 
-> Collected tricks, power features, and non-obvious behaviors.
-> See `Keybinds.md` for the full shortcut reference.
+> Zed-first Vim setup — tricks and non-obvious behaviors.
+> See `Keybinds.md` (bindings) and `docs/workflow.md` (daily/agent flow).
 
 ---
 
@@ -127,7 +127,7 @@ Navigate to where you were last editing without using marks.
 1. `] h` to review each change
 2. `space g h r` to discard junk hunks
 3. `:G` → stage + commit in the panel
-4. Save lazygit (`space r l`) for rebases, stashes, complex history
+4. Save lazygit (`space g` or `space r r`) for rebases, stashes, complex history
 
 ---
 

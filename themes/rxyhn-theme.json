@@ -7,15 +7,7 @@
       "name": "NvChad Rxyhn Theme",
       "appearance": "dark",
       "style": {
-        "accents": [
-          "#6791C9",
-          "#78B892",
-          "#7ACFE4",
-          "#ecd28b",
-          "#E89982",
-          "#C488EC",
-          "#DF5B61"
-        ],
+        "accents": ["#6791C9", "#78B892", "#7ACFE4", "#ecd28b", "#E89982", "#C488EC", "#DF5B61"],
         "background.appearance": "opaque",
         "background": "#061115",
         "border": "#222d31",

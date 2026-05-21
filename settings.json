@@ -6,247 +6,175 @@
 // To see all of Zed's default settings without changing your
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
-// ~/.config/zed/settings.json
 {
-  // === Theme & Appearance ===
-  "semantic_tokens": "combined",
+  "inlay_hints": {
+    "enabled": true
+  },
+  "lsp_document_colors": "background",
+  "ui_font_weight": 400.0,
+  "colorize_brackets": true,
+  "tabs": {
+    "git_status": true,
+    "file_icons": true
+  },
+  "git_panel": {
+    "show_count_badge": true,
+    "tree_view": true,
+    "file_icons": true,
+    "status_style": "label_color"
+  },
+  "soft_wrap": "editor_width",
+  "buffer_font_weight": 350.0,
+  "title_bar": {
+    "show_branch_status_icon": false,
+    "show_onboarding_banner": true
+  },
+  "sticky_scroll": {
+    "enabled": true
+  },
+  "prettier": {
+    "allowed": true
+  },
+  "tab_size": 2,
+  "indent_guides": {
+    "coloring": "indent_aware",
+    "line_width": 1,
+    "active_line_width": 2,
+    "background_coloring": "disabled"
+  },
+  "scrollbar": {
+    "axes": {
+      "vertical": false,
+      "horizontal": true
+    },
+    "show": "auto"
+  },
+  "terminal": {
+    "scrollbar": {
+      "show": "system"
+    },
+    "cursor_shape": "bar",
+    "blinking": "on"
+  },
+  "minimap": {
+    "thumb_border": "left_open",
+    "thumb": "always",
+    "max_width_columns": 45,
+    "show": "auto"
+  },
+  "code_lens": "on",
   "languages": {
     "TypeScript": {
-      "document_folding_ranges": "off",
-      "colorize_brackets": true,
       "inlay_hints": {
-        "show_background": false,
-        "show_other_hints": true,
-        "show_type_hints": true,
-        "show_value_hints": true,
         "enabled": true
-      },
-      "indent_guides": {
-        "coloring": "indent_aware",
-        "line_width": 2,
-        "active_line_width": 1,
-        "background_coloring": "disabled"
-      }
-    },
-    "TSX": {
-      "inlay_hints": { "enabled": true, "show_background": false },
-      "colorize_brackets": true
-    },
-    "JavaScript": {
-      "inlay_hints": { "enabled": true, "show_background": false },
-      "colorize_brackets": true
-    },
-    "Markdown": {
-      "soft_wrap": "editor_width",
-      "show_edit_predictions": false
-    }
-  },
-  // TypeScript LSP — show hints only when useful, not on obvious inferred types
-  "lsp": {
-    "typescript-language-server": {
-      "initialization_options": {
-        "preferences": {
-          // param names: only on literals (not when arg name == param name)
-          "includeInlayParameterNameHints": "literals",
-          "includeInlayParameterNameHintsWhenArgumentMatchesName": false,
-          // don't show variable types when TS can obviously infer them
-          "includeInlayVariableTypeHints": false,
-          "includeInlayVariableTypeHintsWhenTypeMatchesName": false,
-          // function param types — off, too noisy
-          "includeInlayFunctionParameterTypeHints": false,
-          // return types — on, useful to see without hovering
-          "includeInlayFunctionLikeReturnTypeHints": true,
-          // property types in class/object — off, inferred by TS
-          "includeInlayPropertyDeclarationTypeHints": false,
-          // enum values — on, very useful
-          "includeInlayEnumMemberValueHints": true
-        }
       }
     }
   },
-  "notification_panel": {
-    "show_count_badge": true
+  "vim_mode": true,
+  "vim": {
+    "use_smartcase_find": true,
+    "toggle_relative_line_numbers": true
   },
-  "agent_buffer_font_size": 15.0,
-  "ui_font_family": "MonoLisa",
-  "buffer_line_height": "standard",
+  "relative_line_numbers": "enabled",
+  "diagnostics": {
+    "inline": {
+      "enabled": true
+    }
+  },
   "agent_servers": {
-    "factory-droid": {
-      "type": "registry"
-    },
     "qoder": {
       "type": "registry"
     },
-    "pi-acp": {
-      "type": "registry"
-    },
-    "opencode": {
-      "type": "registry"
-    },
-    "kimi": {
-      "type": "registry"
-    },
-    "junie": {
-      "type": "registry"
-    },
-    "gemini": {
+    "cursor": {
       "type": "registry"
     },
     "codex-acp": {
       "type": "registry"
-    },
-    "claude-acp": {
-      "type": "registry",
-    },
+    }
   },
-  "outline_panel": {
-    "button": false,
-  },
-  "search": {
-    "button": true,
-  },
-  "title_bar": {
-    "show_branch_name": true,
-    "show_project_items": true,
-    "show_onboarding_banner": true,
-    "show_sign_in": true,
-    "show_user_menu": true,
-    "show_user_picture": true,
-  },
-  "theme": {
-    "mode": "system",
-    "light": "Catppuccin Mocha",
-    "dark": "NvChad Rxyhn Theme",
-  },
-  "icon_theme": "Catppuccin Mocha",
-  "buffer_font_family": "MonoLisa",
-  "buffer_font_size": 16.0,
-  "buffer_font_weight": 450.0,
-  "ui_font_size": 15.0,
-  "agent_ui_font_size": 16.0,
 
-  // === Vim ===
-  "vim_mode": true,
-  "vim": {
-    "use_system_clipboard": "always",
-    "use_smartcase_find": true,
-    // "enable_vim_sneak": true,
-    "gdefault": false,
-    "toggle_relative_line_numbers": true,
-    "highlight_on_yank_duration": 200,
-    "use_regex_search": true,
+  "language_models": {
+    "opencode": {
+      "show_zen_models": false
+    }
   },
-  "current_line_highlight": "all",
-  "relative_line_numbers": "enabled",
   "base_keymap": "Cursor",
-
-  // === Which Key (shows leader hints) ===
-  "which_key": {
-    "enabled": true,
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Warm Charmed Icons",
+    "dark": "Warm Charmed Icons"
   },
-
-  // === Layout ===
+  "ui_font_family": "MonoLisa",
+  "buffer_line_height": "standard",
+  "buffer_font_family": "MonoLisa",
+  "outline_panel": {
+    "dock": "left"
+  },
   "project_panel": {
-    "button": true,
+    "git_status": true,
+    "git_status_indicator": true,
+    "bold_folder_labels": false,
+    "indent_size": 14.0,
     "dock": "left",
-    "indent_size": 20.0,
     "entry_spacing": "standard",
-  },
-  "git_panel": { "dock": "right" },
-  "tab_bar": {
-    "show_tab_bar_buttons": true,
-    "show_nav_history_buttons": true,
-    "show": true,
-  },
-  "scrollbar": { "show": "never" },
-  "minimap": {
-    "show": "auto",
-    "current_line_highlight": "all",
-    "max_width_columns": 55,
-    "thumb": "always",
-    "thumb_border": "left_open",
-  },
-  "tabs": { "show_diagnostics": "errors" },
-  "indent_guides": { "enabled": true, "coloring": "indent_aware" },
 
-  // === Editor ===
-  "format_on_save": "on",
-  "soft_wrap": "editor_width",
-  "cursor_blink": true,
-  "show_whitespaces": "boundary",
-  "inlay_hints": { "enabled": true },
-  "linked_edits": true,
-  "colorize_brackets": true,
-  "remove_trailing_whitespace_on_save": true,
-  "show_edit_predictions": true,
-
-  // === Prettier ===
-  "prettier": { "allowed": true },
-
-  // === Terminal ===
-  "terminal": {
-    "toolbar": {
-      "breadcrumbs": false,
-    },
-    "shell": { "program": "zsh" },
-    "font_family": "MonoLisa",
-    "font_size": 15.0,
-    "blinking": "on",
-    "dock": "bottom",
+    "file_icons": true,
+    "folder_icons": true,
+    "auto_reveal_entries": true
   },
-
-  // === Git ===
-  "git": {
-    "inline_blame": { "enabled": true },
-  },
-
-  // === AI ===
   "agent": {
+    "show_turn_stats": true,
+    "dock": "right",
+    "sidebar_side": "right",
+    "favorite_models": [],
+    "model_parameters": [],
     "tool_permissions": {
       "tools": {
-        "create_directory": {
+        "move_path": {
+          "default": "confirm"
+        },
+        "copy_path": {
           "default": "allow"
         },
-        "terminal": {
-          "default": "allow",
-          "always_allow": [
-            {
-              "pattern": "^wc\\b"
-            },
-            {
-              "pattern": "^cat\\s+test\\.txt(\\s|$)"
-            },
-            {
-              "pattern": "^find\\s+\\.(\\s|$)"
-            }
-          ]
+        "write_file": {
+          "default": "allow"
+        },
+        "edit_file": {
+          "default": "allow"
         },
         "fetch": {
-          "always_allow": [
-            {
-              "pattern": "^https?://github\\.com"
-            }
-          ]
+          "default": "allow"
+        },
+        "search_web": {
+          "default": "allow"
         }
-      }
+      },
+      "default": "confirm"
     },
-    "default_profile": "ask",
+    "default_profile": "write",
     "default_model": {
-      "effort": "high",
+      "effort": "max",
       "enable_thinking": true,
-      "provider": "zed.dev",
-      "model": "claude-sonnet-4-6",
-    },
+      "provider": "opencode",
+      "model": "go/deepseek-v4-flash"
+    }
   },
-
-  // === File types ===
-  "file_types": {
-    "JSONC": ["tsconfig.json", "tsconfig.*.json", ".prettierrc"],
+  "cli_default_open_behavior": "existing_window",
+  "ui_font_size": 15.5,
+  "buffer_font_size": 16.0,
+  "agent_buffer_font_size": 15.0,
+  "theme": {
+    "mode": "dark",
+    "light": "Catppuccin Latte",
+    "dark": "Tokyo Night"
   },
-
+  // === Which Key (shows leader hints) ===
+  "which_key": {
+    "enabled": true
+  },
   // === Telemetry ===
   "telemetry": {
     "diagnostics": false,
-    "metrics": false,
-  },
+    "metrics": false
+  }
 }
