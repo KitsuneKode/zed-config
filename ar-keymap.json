@@ -1,0 +1,175 @@
+// REFERENCE ONLY — Zed does not load this file automatically.
+//
+// Lean zed-first map (Cursor AI + small leader). To try:
+//   cp ar-keymap.json keymap.json && reload Zed
+//
+// Zed-first keymap with Vim muscle memory and Cursor-style AI shortcuts.
+// https://zed.dev/docs/key-bindings
+[
+  // --- Terminal: inline assist ---
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-k": "assistant::InlineAssist"
+    }
+  },
+
+  // --- Global ---
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-shift-o": "projects::OpenRecent"
+    }
+  },
+  {
+    "context": "Workspace && not_editing",
+    "bindings": {
+      "space e": "workspace::ToggleLeftDock"
+    }
+  },
+  {
+    "context": "Workspace || Editor || Terminal",
+    "bindings": {
+      "ctrl-`": "workspace::ToggleBottomDock"
+    }
+  },
+
+  // --- Pane navigation (ctrl-l reserved for agent toggle) ---
+  {
+    "context": "Dock || Terminal || Editor",
+    "bindings": {
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-shift-k": "workspace::ActivatePaneUp"
+    }
+  },
+
+  // --- Insert mode ---
+  {
+    "context": "Editor && vim_mode == insert && !menu",
+    "bindings": {
+      "j k": "vim::NormalBefore",
+      "ctrl-s": ["action::Sequence", ["vim::NormalBefore", "workspace::Save"]],
+      "ctrl-k": "assistant::InlineAssist",
+      "ctrl-l": "agent::Toggle"
+    }
+  },
+
+  // --- Normal mode ---
+  {
+    "context": "vim_mode == normal && !menu",
+    "bindings": {
+      "ctrl-s": "workspace::Save",
+      "ctrl-k": "assistant::InlineAssist",
+      "ctrl-l": "agent::Toggle"
+    }
+  },
+
+  // --- Visual mode ---
+  {
+    "context": "vim_mode == visual && !menu",
+    "bindings": {
+      "ctrl-k": "assistant::InlineAssist",
+      "ctrl-shift-l": "agent::AddSelectionToThread",
+      "ctrl-s": [
+        "action::Sequence",
+        ["vim::SwitchToNormalMode", "workspace::Save"]
+      ]
+    }
+  },
+  {
+    "context": "Editor && vim_mode == visual && !VimWaiting && !VimObject",
+    "bindings": {
+      "shift-j": "editor::MoveLineDown",
+      "shift-k": "editor::MoveLineUp"
+    }
+  },
+
+  // --- Leader (space) — daily actions only ---
+  {
+    "context": "Editor && VimControl && !VimWaiting && !menu",
+    "bindings": {
+      "space space": "file_finder::Toggle",
+      "space /": "workspace::NewSearch",
+      "space e": "workspace::ToggleLeftDock",
+      "space a": "workspace::ToggleRightDock",
+      "space t": "workspace::ToggleBottomDock",
+      "space c a": "editor::ToggleCodeActions",
+      "space c r": "editor::Rename",
+      "space d": "diagnostics::Deploy",
+      "space ;": "command_palette::Toggle",
+      "space g": ["task::Spawn", { "task_name": "lazygit" }],
+      "space r r": "task::Spawn",
+      "space r d": ["task::Spawn", { "task_name": "dev (bun)" }],
+      "space r t": ["task::Spawn", { "task_name": "test (bun)" }],
+      "K": "editor::Hover",
+      "] d": "editor::GoToDiagnostic",
+      "[ d": "editor::GoToPreviousDiagnostic",
+      "] h": "editor::GoToHunk",
+      "[ h": "editor::GoToPreviousHunk"
+    }
+  },
+
+  // --- Project panel (minimal tree navigation) ---
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "j": "menu::SelectNext",
+      "k": "menu::SelectPrevious",
+      "h": "project_panel::CollapseSelectedEntry",
+      "l": "project_panel::ExpandSelectedEntry",
+      "enter": "project_panel::OpenPermanent",
+      "a": "project_panel::NewFile",
+      "shift-a": "project_panel::NewDirectory",
+      "r": "project_panel::Rename",
+      "d": "project_panel::Delete",
+      "q": "workspace::ToggleLeftDock",
+      "escape": "project_panel::ToggleFocus"
+    }
+  },
+
+  // --- Git panel ---
+  {
+    "context": "GitPanel",
+    "bindings": {
+      "q": "git_panel::Close"
+    }
+  },
+
+  // --- Agent panel ---
+  {
+    "context": "AgentPanel",
+    "bindings": {
+      "ctrl-\\": "workspace::ToggleRightDock",
+      "ctrl-n": "agent::NewThread",
+      "ctrl-shift-h": "agents_sidebar::ToggleThreadHistory",
+      "ctrl-alt-p": "agent::ManageProfiles"
+    }
+  },
+
+  // --- Empty pane ---
+  {
+    "context": "EmptyPane || SharedScreen",
+    "bindings": {
+      "space space": "file_finder::Toggle",
+      "space /": "workspace::NewSearch",
+      "space e": "workspace::ToggleLeftDock",
+      "space a": "workspace::ToggleRightDock",
+      "space ;": "command_palette::Toggle"
+    }
+  },
+
+  // --- Editor: restore standard shortcuts outside Vim overrides ---
+  {
+    "context": "Editor && !menu",
+    "bindings": {
+      "ctrl-c": "editor::Copy",
+      "ctrl-v": "editor::Paste",
+      "ctrl-x": "editor::Cut",
+      "ctrl-a": "editor::SelectAll",
+      "ctrl-k": "assistant::InlineAssist",
+      "ctrl-shift-l": "agent::AddSelectionToThread",
+      "ctrl-shift-a": "editor::SelectAllMatches"
+    }
+  }
+]

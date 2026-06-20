@@ -1,21 +1,166 @@
-// Zed keymap
-//
-// For information on binding keys, see the Zed
-// documentation: https://zed.dev/docs/key-bindings
-//
-// To see the default key bindings run `zed: open default keymap`
-// from the command palette.
+// Zed keymap — zed-first, small space leader, which-key friendly
+// https://zed.dev/docs/key-bindings
 [
+  // --- Pane focus (ctrl-hjkl everywhere useful) ---
   {
-    "context": "Workspace",
+    "context": "Dock || Terminal || Editor",
     "bindings": {
-      // "shift shift": "file_finder::Toggle"
-    }
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-/": "terminal_panel::Toggle",
+    },
+  },
+
+  // --- Save + leader prefix ---
+  {
+    "context": "vim_mode == normal && !menu",
+    "bindings": {
+      "ctrl-s": "workspace::Save",
+      ":": "command_palette::Toggle",
+      // Free space as leader prefix for which-key (default is vim::WrappingRight)
+      "space": null,
+    },
   },
   {
-    "context": "Editor && vim_mode == insert",
+    "context": "Editor && vim_mode == insert && !menu",
     "bindings": {
-      //      "j k": "vim::NormalBefore",
-    }
-  }
+      "j k": "vim::NormalBefore",
+      "ctrl-s": ["action::Sequence", ["vim::NormalBefore", "workspace::Save"]],
+    },
+  },
+  {
+    "context": "vim_mode == visual && !menu",
+    "bindings": {
+      "ctrl-s": [
+        "action::Sequence",
+        ["vim::SwitchToNormalMode", "workspace::Save"],
+      ],
+    },
+  },
+
+  // --- Leader + tab nav (editor only — avoids stealing keys from panels) ---
+  {
+    "context": "Editor && VimControl && !VimWaiting && !menu",
+    "bindings": {
+      "shift-h": "pane::ActivatePreviousItem",
+      "shift-l": "pane::ActivateNextItem",
+      "space space": "file_finder::Toggle",
+      "space /": "workspace::NewSearch",
+      "space e": "project_panel::ToggleFocus",
+      "space a": "agent::ToggleFocus",
+      "space t t": "workspace::NewTerminal",
+      "space t f": "workspace::NewCenterTerminal",
+      "space c a": "editor::ToggleCodeActions",
+      "space c r": "editor::Rename",
+      "space d": "diagnostics::Deploy",
+      // Git group — palette: git graph / git diff / git panel
+      "space g g": "git_panel::ToggleFocus",
+      "space g h": "git_graph::Open",
+      "space g d": "git::Diff",
+      "space g b": "git::Blame",
+      "space g l": ["task::Spawn", { "task_name": "lazygit" }],
+      "space g o": "editor::ToggleSelectedDiffHunks",
+      "space g e": "editor::ExpandAllDiffHunks",
+      "space r r": "task::Spawn",
+      "space r d": ["task::Spawn", { "task_name": "dev (bun)" }],
+      "space r t": ["task::Spawn", { "task_name": "test (bun)" }],
+    },
+  },
+
+  // --- Project panel (defaults cover j/k/h/l; we only add daily extras) ---
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "space e": "project_panel::Toggle",
+      "a": "project_panel::NewFile",
+      "shift-a": "project_panel::NewDirectory",
+      "r": "project_panel::Rename",
+      "d": "project_panel::Delete",
+      "x": "project_panel::Cut",
+      "y": "project_panel::Copy",
+      "p": "project_panel::Paste",
+      "q": "project_panel::ToggleFocus",
+      "escape": "project_panel::ToggleFocus",
+      ":": "command_palette::Toggle",
+      "/": "project_panel::NewSearchInDirectory",
+      "shift-v": "project_panel::OpenSplitVertical",
+      "shift-h": "project_panel::OpenSplitHorizontal",
+    },
+  },
+
+  // --- Git panel (ChangesList defaults: j/k/x/stage; q closes like neo-tree) ---
+  {
+    "context": "GitPanel",
+    "bindings": {
+      "q": "git_panel::ToggleFocus",
+    },
+  },
+
+  // --- Git graph (defaults: j/k scroll; q closes tab — no git_graph::Close action) ---
+  {
+    "context": "GitGraph && !GitGraphSearchBar",
+    "bindings": {
+      "q": "pane::CloseActiveItem",
+      "escape": "pane::CloseActiveItem",
+    },
+  },
+
+  // --- Agent panel — no vim_mode filter; exclude chat input so q still types in prompt ---
+  {
+    "context": "AgentPanel",
+    "bindings": {
+      "ctrl-\\": "workspace::ToggleRightDock",
+      "ctrl-n": "agent::NewThread",
+      "ctrl-shift-h": "agents_sidebar::ToggleThreadHistory",
+      "ctrl-alt-p": "agent::ManageProfiles",
+    },
+  },
+  {
+    "context": "(ThreadsSidebar && !Editor) || AgentPanel > Markdown",
+    "bindings": {
+      "q": "workspace::ToggleRightDock",
+      "space a": "workspace::ToggleRightDock",
+    },
+  },
+  {
+    "context": "AcpThread && !AcpThread > Editor",
+    "bindings": {
+      "q": "workspace::ToggleRightDock",
+      "space a": "workspace::ToggleRightDock",
+    },
+  },
+  {
+    "context": "vim_mode == normal && !menu",
+    "bindings": {
+      "ctrl-d": [
+        "action::Sequence",
+        ["vim::ScrollDown", "editor::ScrollCursorCenter"],
+      ],
+      "ctrl-b": "workspace::ToggleLeftDock",
+      "n": [
+        "action::Sequence",
+        ["vim::MoveToNextMatch", "editor::ScrollCursorCenter"],
+      ],
+      "shift-n": [
+        "action::Sequence",
+        ["vim::MoveToPreviousMatch", "editor::ScrollCursorCenter"],
+      ],
+      "ctrl-u": [
+        "action::Sequence",
+        ["vim::ScrollUp", "editor::ScrollCursorCenter"],
+      ],
+    },
+  }, // --- Empty pane (leader still works with no file open) ---
+  {
+    "context": "EmptyPane || SharedScreen",
+    "bindings": {
+      "space space": "file_finder::Toggle",
+      "space /": "workspace::NewSearch",
+      ":": "command_palette::Toggle",
+      "space e": "project_panel::ToggleFocus",
+      "space a": "agent::ToggleFocus",
+    },
+  },
 ]

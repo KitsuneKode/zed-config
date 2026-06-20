@@ -2,6 +2,20 @@
 
 Quick reference for what you have **after** the lean pass. Reload Zed after pulling changes.
 
+## Reference keymaps (not loaded until you copy)
+
+| File | Contents |
+|------|----------|
+| `keymap.json` | Active config |
+| `keymap.original.json` | Full pre-restructure map (~412 lines) |
+| `ar-keymap.json` | Lean zed-first map |
+
+```bash
+cp keymap.original.json keymap.json   # try old bindings
+cp ar-keymap.json keymap.json          # try lean map
+git checkout keymap.json             # restore committed baseline
+```
+
 ## Layout
 
 | Side | Panel |
